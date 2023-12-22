@@ -3,7 +3,7 @@ using MontyHall;
 
 Console.WriteLine("Monty Hall Simulator\n");
 
-int numberOfGames = 10000000;
+int numberOfGames = 1000000;
 
 Functions.RunRandomGames(numberOfGames);
 

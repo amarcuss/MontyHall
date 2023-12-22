@@ -10,6 +10,9 @@ namespace MontyHall
 {
     internal static class Functions
     {
+        /* Run a specified number of games, randomly picking whether or not to switch doors in each game. 
+         * This is meant to be multi-thread safe.
+         */
         public static void RunRandomGames(int numberOfGames)
         {
                    
@@ -80,7 +83,9 @@ namespace MontyHall
             }
         }
 
-        // Create a function to run the games
+        /* This function runs the games a specified number of times and takes in whether or not to switch the doors deterministically.
+         * It is also meant to be thread safe and outputs the overall results into a text file.
+         */ 
         public static void RunGames(int numberOfGames, bool switchDoor)
         {
             int numberOfWins = 0;
@@ -94,7 +99,10 @@ namespace MontyHall
 
             object outputLock = new object();
 
-            Console.WriteLine($"Running {numberOfGames.ToString("N0")} games with switchDoor set to {switchDoor}.");
+            lock (outputLock)
+            {
+                Console.WriteLine($"Running {numberOfGames.ToString("N0")} games with switchDoor set to {switchDoor}.");
+            }
 
             for (int i = 0; i < numberOfGames; i++)
             {
